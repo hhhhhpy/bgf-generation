@@ -337,6 +337,7 @@ class HAMNet(nn.Module):
         inputs_norm = self.cal_l1_norm(inputs)
         bg_score = torch.einsum('ntd,ld->ntl',[inputs_norm,bg_norm])
         bg_score = F.softmax(bg_score,dim=-1)
+        #add contrastive learning
         # bg_score_max = torch.max(bg_score,dim=-2,keepdim=True)[0]
         # bg_score_min = torch.min(bg_score,dim=-2,keepdim=True)[0]
         # bg_score = (bg_score-bg_score_min)/(bg_score_max-bg_score_min)
