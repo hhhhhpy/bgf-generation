@@ -43,7 +43,7 @@ class Tester():
         if _label.sum() == 0:
             return
 
-        elem, _, _, element_atn, bg_score,_ = net(features)
+        elem, _, _, element_atn,_,_,_,bg_score = net(features)
 
         # bg_score = bg_score.max(-1,keepdim = True)[0] #(bs,t,1) #max操作
         # bg_score_max = bg_score.max(-2,keepdim = True)[0]
@@ -51,16 +51,17 @@ class Tester():
         # bg_score = (bg_score-bg_score_min)/(bg_score_max-bg_score_min)
         # bg_soft = torch.where((1-bg_score)>0.1,1.0,0.1)
 
-
-        t = torch.range(0,bg_score.size(1)-1)
-        # plt.plot(t,bg_score[0].squeeze().cpu(),t,element_atn[0].squeeze().cpu())
+        # bg_score_ori = bg_score[0]
+        # t = torch.range(0,bg_score_ori.size(1)-1)
+        # plt.plot(t,bg_score_ori[0].squeeze().cpu(),t,element_atn[0].squeeze().cpu())
         # plt.legend(['bg','fg'])
+        # plt.show()
 
-        bg_score = bg_score.transpose(-1, -2)
-        plt.plot(t,bg_score[0][0].cpu(),t, bg_score[0][1].cpu(),t, bg_score[0][2].cpu()
-                 )
-
-        plt.show()
+        # bg_score = bg_score.transpose(-1, -2)
+        # plt.plot(t,bg_score[0][0].cpu(),t, bg_score[0][1].cpu(),t, bg_score[0][2].cpu()
+        #          )
+        #
+        # plt.show()
 
         # element_atn = bg_soft * element_atn
 

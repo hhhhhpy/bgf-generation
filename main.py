@@ -51,10 +51,12 @@ if __name__ == "__main__":
         gpus=config.gpus,
         max_epochs=config.max_epochs,
         progress_bar_refresh_rate=config.progress_refresh,
-        callbacks=[system.LatestCheckpoint(config.save_path, verbose=False)])
+        callbacks=[system.LatestCheckpoint(config.save_path, verbose=False)],
+        check_val_every_n_epoch = 10)
 
     if config.test:
         trainer.test(model)
     else:
+
         trainer.fit(model)
         trainer.test(ckpt_path=None)
